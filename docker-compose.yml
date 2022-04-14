@@ -5,7 +5,3 @@ services:
     container_name: amazon_linux
     image: amazonlinux
     tty: true
-    # volumes:
-    #   - ./src:/var/www/src:cached
-    # working_dir: /var/www/src
-    # depends_on:
