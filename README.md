@@ -2,28 +2,20 @@
 https://hub.docker.com/_/amazonlinux
 
 
-## 起動・終了
+## start / stop
 ```
 docker-compose up -d
 docker-compose down
-
-// 再起動
-docker-compose restart
 ```
 
-## ビルドして再起動
+## enter the container
 ```
-docker-compose up -d --build
-```
-
-## コンテナに入る
-```
-docker-compose exec --user root amazon_linux bash
 docker-compose exec amazon_linux bash
+docker-compose exec --user root amazon_linux bash
 ```
 
 
-## 終了時にコンテナを削除
+## delete containers on exit
 ```
 docker-compose down --rmi all
 docker-compose down --rmi all --volumes
@@ -70,5 +62,39 @@ ls ~/.ssh
 
 
 
+
+
+
+______________________________________________________
+## CentOS 7
+```
+『epel download』で検索。（EPEL）
+右クリック→リンク先のアドレスをコピー
+
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo rpm -Uvh epel-release-latest-7.noarch.rpm
+sudo yum -y install ansible
+ansible --version
+```
+
+______________________________________________________
+## Amazon Linux2にAnisbleをインストールする方法
+https://qiita.com/1_ta/items/92dcfa6fa2a33cb11442
+
+
+Amazon Linux2でインストールするためには、「Amazon Linux Extras」が必要です。
+
+
+bash-4.2# which amazon-linux-extras
+/usr/bin/amazon-linux-extras
+
+bash-4.2# amazon-linux-extras | grep ansible
+  0  ansible2                 available    \
+
+### 有効化
+sudo amazon-linux-extras enable ansible2
+
+### インストール
+sudo yum install -y ansible
 
 
