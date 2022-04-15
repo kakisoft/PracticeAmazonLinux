@@ -1,0 +1,74 @@
+version: "3"
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - "8000:80"
+      - "44300:443"
+    depends_on:
+      - php
+    volumes:
+      - ./containers/nginx/nginx.conf:/etc/nginx/nginx.conf:cached
+      - ./containers/nginx/conf.d:/etc/nginx/conf.d:cached
+      - ./containers/nginx/certs:/etc/nginx/certs:cached
+      - ./src:/var/www/src:cached
+
+  php:
+    container_name: php
+    build: ./containers/php
+    volumes:
+      - ./src:/var/www/src:cached
+    working_dir: /var/www/src
+    depends_on:
+      - mysql
+    tty: true
+
+  node:
+    container_name: node
+    image: node:16-slim
+    tty: true
+    working_dir: /var/www/src
+    volumes:
+      - ./src:/var/www/src:cached
+
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: myapp01
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+  mysql_test:
+    container_name: mysql_test
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: myapp01
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "13306:3306"
+    volumes:
+      - db-test-data:/var/lib/mysql
+
+  redis:
+    container_name: redis
+    image: redis:6.0
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - session-data:/data
+
+volumes:
+  db-data:
+  db-test-data:
+  session-data:
