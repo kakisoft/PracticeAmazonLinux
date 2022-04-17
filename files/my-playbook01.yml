@@ -1,0 +1,73 @@
+---
+
+- hosts: localhost
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install git
+      yum:
+        name: git
+        state: present
+
+    - name: Install aws-cli
+      yum:
+        name: aws-cli
+        state: present
+
+    - name: Get nodejs
+      shell: curl -sL https://rpm.nodesource.com/setup_16.x | bash -
+    - name: Install nodejs
+      yum:
+        name: nodejs
+        state: present
+
+
+
+
+
+    # - name: install apache
+    #   yum: nodejs
+    # - name: start apache and enabled
+    #   service: name=httpd state=started enabled=yes
+
+
+    # - name: uninstall already installed all version
+    #   command: curl -sL https://rpm.nodesource.com/setup_16.x
+    #   yum:
+    #     name: nodejs
+    #     state: present
+
+
+      # yum:
+      #   name: aws-cli
+
+
+    # #=====[ Remove Already installed Tools ]=====
+    # - name: uninstall already installed all version
+    #   command: sudo yum remove -y php*
+    #   command: sudo yum remove -y epel-release*
+
+    # - name: install apache
+    #   yum: name=httpd state=latest
+    # - name: start apache and enabled
+    #   service: name=httpd state=started enabled=yes
+    # - name: change owner
+    #   file: dest=/var/www/html owner=vagrant recurse=yes
+    # - name: copy index.html
+    #   copy: src=./index.html dest=/var/www/html/index.html owner=vagrant
+
+
+    # - name: install php packages
+    #   yum: name={{item}} state=latest
+    #   with_items:
+    #     - php
+    #     - php-devel
+    #     - php-mbstring
+    #     - php-mysql
+
+
+
+    #   notify:
+    #     - restart apache
+    # - name: copy hello.php
+    #   copy: src=./hello.php dest=/var/www/html/hello.php owner=vagrant

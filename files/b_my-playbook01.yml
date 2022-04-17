@@ -1,0 +1,75 @@
+---
+- hosts: localhost
+  sudo: yes
+  vars:
+    mysql_repo_url: http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+    mysql_user    : kaki
+    mysql_password: kaki
+    mysql_database: kakidb01
+  tasks:
+    #=====[ Remove Already installed Tools ]=====
+    - name: uninstall already installed all version
+      command: sudo yum remove -y php*
+      command: sudo yum remove -y epel-release*
+#      command: sudo rpm -e   {{mysql_repo_url}}
+#      command: sudo yum remove -y mysql*
+
+    #=====[ apache ]=====
+    - name: install apache
+      yum: name=httpd state=latest
+    - name: start apache and enabled
+      service: name=httpd state=started enabled=yes
+
+    #=====[ PHP ]=====
+    - name: yum install epel-repease
+      yum: name=epel-release state=installed
+
+    - name: add remi-repo repository
+      command: rpm -ih http://rpms.famillecollet.com/enterprise/remi-release-7.rpm creates=/etc/yum.repos.d/remi.repo
+
+    - name: install php 7.2
+      yum: name={{ item }} enablerepo=remi,remi-php72 state=installed
+      with_items:
+        - php
+        - php-devel
+        - php-fpm
+        - php-gd
+        - php-mbstring
+        - php-mcrypt
+        - php-mysqlnd
+        - php-mysql
+        - php-pdo
+        - php-xml
+        - php-zip
+
+    #=====[ MySQL ]=====
+#ハマりにハマったんで、MySQLは一旦休止。
+#
+#    - name: install mysql
+#      command: sudo rpm -ivh {{mysql_repo_url}}
+#      command: echo "If there is no suitable command here, I get an error after executing the above command! I wonder why!"
+#    - name: install mysql
+#      yum: name={{item}} state=present
+#      with_items:
+#        - mysql-community-server
+#
+#    - name: create mysql database
+#      mysql_db: name={{ mysql_database }} state=present
+#    - name: create mysql user
+#      #mysql_user: name={{ mysql_user }} host={{ item }} password={{ mysql_password }} priv={{ mysql_database }}.*:ALL,GRANT state=present
+#      mysql_user: name={{ mysql_user }} host={{ item }} password={{ mysql_password }} priv=*.*:ALL,GRANT state=present
+#      with_items:
+#        - localhost
+#        #- 192.168.10.%
+#    - name: uncomment a line bind-address = 127.0.0.1
+#      replace: >
+#        dest=/etc/mysql/mysql.conf.d/mysqld.cnf
+#        regexp='^bind-address'
+#        replace='#bind-address'
+#    - name: start mysql
+#      service: name=mysql state=restarted enabled=yes
+#
+#    - name: restart mysql
+#      command: sudo systemctl restart mysqld.service
+#      command: echo "If there is no suitable command here, I get an error after executing the above command! I wonder why!"
+

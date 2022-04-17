@@ -10,9 +10,6 @@ services:
       - "2022:22"
       - "8080:80"
       - "4043:443"
-
-    # volumes:
-    #   - ./src:/var/www/src:cached
-    # working_dir: /var/www/src
-
-
+    volumes:
+      - ./files:/var/tmp/files
+    working_dir: /var/tmp/files
