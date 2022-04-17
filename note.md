@@ -27,6 +27,12 @@ _____________________________________________
 
 fatal: [localhost]: FAILED! => {"changed": false, "msg": "No package matching 'nodejs' found available, installed or updated", "rc": 126, "results": ["No package matching 'nodejs' found available, installed or updated"]}
 
+
+
+[WARNING]: Consider using the get_url or uri module rather than running 'curl'.  If you need to use command because get_url or uri is insufficient you can add 'warn: false' to
+this command task or set 'command_warnings=False' in ansible.cfg to get rid of this message.
+
+
 _____________________________________________
 
 「 | bash -」を外すとエラーとなる。なぜ？
