@@ -35,6 +35,9 @@ _______________________________________________________________________________
 amazon-linux-extras enable nginx1
 
 
+## yumコマンド一覧
+https://qiita.com/kazu56/items/3eeab8884f62be1cf3e6
+
 
 
 
@@ -75,12 +78,25 @@ sudo mv composer.phar /usr/local/bin/composer
 
 
 
-kakisoftnoMacBook:ryuki-prd kakisoft$ ls -la | grep ryuki
--rwxr-xr-x   1 kakisoft  staff  2688  4  1 12:14 ryuki
- 751
 
-kakisoftnoMacBook:PracticeLaravel8-01 kakisoft$ ls -la | grep myapp
--rwxr-xr-x   1 kakisoft  staff  2881  3 16 22:44 myapp
+
+sudo yum install php php7.4-{pear,cgi,common,curl,mbstring,gd,mysqlnd,gettext,bcmath,json,xml,fpm,intl,zip,imap}
+
+
+sudo yum install php-{mbstring}
+sudo yum install php8.0-{mbstring}
+sudo yum install php php-{mbstring}
+sudo yum install php php8.0-{mbstring,xml}
+
+sudo yum install php php8.0-{xml}
+
+
+yum -y install php-mbstring
+
+yum install --enablerepo=remi,remi-php70 php php-devel php-mbstring php-pdo php-gd
+
+yum install php-mbstring
+sudo yum install -y php-mbstring php-devel
 
 
 
