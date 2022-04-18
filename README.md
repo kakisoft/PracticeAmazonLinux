@@ -17,13 +17,12 @@ docker-compose exec --user root amazon_linux bash
 
 ## execute Ansible
 ``
-ansible-playbook my-playbook01.yml
+ansible-playbook my_setup01.yml
 
 
-ansible-playbook my-playbook01.yml --syntax-check
-ansible-playbook my-playbook01.yml --list-task
-ansible-playbook my-playbook01.yml --check
-
+ansible-playbook my_setup01.yml --syntax-check
+ansible-playbook my_setup01.yml --list-task
+ansible-playbook my_setup01.yml --check
 ``
 
 

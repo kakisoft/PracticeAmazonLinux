@@ -4,15 +4,13 @@
   gather_facts: false
   become: true
   tasks:
-    - name: Install git
+    - name: Install yum packages
       yum:
-        name: git
+        name: "{{ item }}"
         state: present
-
-    - name: Install aws-cli
-      yum:
-        name: aws-cli
-        state: present
+      with_items:
+        - git
+        - aws-cli
 
     - name: Get nodejs
       shell: curl -sL https://rpm.nodesource.com/setup_16.x | bash -

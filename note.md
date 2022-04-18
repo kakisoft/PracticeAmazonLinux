@@ -6,8 +6,7 @@
         state: present
 ```
 
-
-fatal: [localhost]: FAILED! => {"changed": false, "msg": "No package matching 'nodejs' found available, installed or updated", "rc": 126, "results": ["No package matching 'nodejs' found available, installed or updated"]}
+fatal: [localhost]: FAILED! => {"changed": false, "msg": "No package matching 'nodejs' found available, installed or updated", "rc": 126,   "results": ["No package matching 'nodejs' found available, installed or updated"]}
 
 _____________________________________________
 # get_url
@@ -46,4 +45,7 @@ _____________________________________________
 ```
 
 
+_____________________________________________
+# dnf リポジトリ
+https://docs.ansible.com/ansible/latest/collections/ansible/builtin/dnf_module.html
 
