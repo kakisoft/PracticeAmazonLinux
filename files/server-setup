@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "Git Installing..."
+yum install -y git
+
+echo "aws-cli Installing..."
+yum install -y git
+
+echo "Node.js Installing..."
+curl -sSL https://rpm.nodesource.com/setup_16.x | bash -
+yum install -y nodejs
+
+echo "PHP Installing..."
+amazon-linux-extras enable php8.0
+yum install -y php
+
+
+# amazon-linux-extras enable

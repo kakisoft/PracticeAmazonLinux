@@ -6,18 +6,49 @@
   tasks:
     - name: Install yum packages
       yum:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        packages:
+          - git
+          - aws-cli
+
+    - name: Activate PHP
+      command: amazon-linux-extras enable php8.0
+    - name: Install PHP
+      yum:
         name: "{{ item }}"
         state: present
       with_items:
-        - git
-        - aws-cli
+        - php
+        - php-mbstring
+        # - pdo_mysql
+        # - php-devel
+        # - php-mbstring
+        # - php-mysql
 
-    - name: Get nodejs
-      shell: curl -sL https://rpm.nodesource.com/setup_16.x | bash -
-    - name: Install nodejs
-      yum:
-        name: nodejs
-        state: present
+
+
+
+    # - name: Get nodejs
+    #   shell: curl -sL https://rpm.nodesource.com/setup_16.x | bash -
+    # - name: Install nodejs
+    #   yum:
+    #     name: nodejs
+    #     state: present
+
+    # - name: Activate PHP
+    #   command: amazon-linux-extras enable php8.0
+    # - name: Install PHP
+    #   yum:
+    #     name: "{{ item }}"
+    #     state: present
+    #   with_items:
+    #     - php
+    #     # - php-mysql
+    #     # - php-devel
+    #     # - php-mbstring
+    #     # - php-mysql
 
 
 

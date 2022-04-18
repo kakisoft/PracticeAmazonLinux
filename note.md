@@ -49,3 +49,4 @@ _____________________________________________
 # dnf リポジトリ
 https://docs.ansible.com/ansible/latest/collections/ansible/builtin/dnf_module.html
 
+
