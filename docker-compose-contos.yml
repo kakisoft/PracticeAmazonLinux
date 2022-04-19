@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  centos:
+    container_name: centos
+    image: centos:7
+    tty: true
+    stdin_open: true
+    privileged: true
+    command: /sbin/init
+    ports:
+      - "2022:22"
+      - "8080:80"
+      - "4043:443"
+    volumes:
+      - ./files:/var/tmp/files
+    working_dir: /var/tmp/files

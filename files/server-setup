@@ -13,6 +13,15 @@ sudo yum install -y nodejs
 echo "PHP Installing..."
 amazon-linux-extras enable php8.0
 sudo yum install -y php
-sudo yum install -y php-mbstring php-devel
+sudo yum install -y php-bcmath php-dom php-gd php-mbstring php-mysqli php-posix php-sodium php-opcache
 
-# amazon-linux-extras enable
+echo "Nginx Installing..."
+amazon-linux-extras enable nginx1
+yum install -y nginx
+
+echo "Composer Installing..."
+sudo curl -sS https://getcomposer.org/installer | sudo php
+sudo mv composer.phar /usr/local/bin/composer
+sudo ln -s /usr/local/bin/composer /usr/bin/composer
+
+
