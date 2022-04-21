@@ -274,3 +274,65 @@ amazonlinux
 
 
 
+
+
+
+
+
+
+bash-4.2# yum list | grep php74 | grep redis
+php74-php-pecl-redis4.x86_64            4.3.0-4.el7.remi              remi-safe 
+php74-php-pecl-redis5.x86_64            5.3.7-1.el7.remi              remi-safe 
+php74-php-phpiredis.x86_64              1.0.1-1.el7.remi              remi-safe 
+bash-4.2# y
+
+yum install php74-php-pecl-redis4.x86_64
+yum install php74-php-pecl-redis5.x86_64
+yum install php74-php-phpiredis.x86_64
+
+
+
+
+
+sudo yum install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+sudo yum --enablerepo=remi-php74 install php-pear
+
+pecl install redis
+
+
+未だ解決できず。
+そのうち試す。
+
+yum info php74-php-pecl-redis5.x86_64
+yum install php74-php-pecl-redis5.x86_64
+
+
+tar zxvf redis-5.3.7.tgz
+cd redis-5.3.7
+
+$ tar zxvf package-x.x.x.tar.gz
+$ cd package-x.x.x
+$ ./configure
+$ make
+$ su
+password : ******
+# make install
+# exit
+
+
+
+
+
+##　ダメだったパターン
+```
+bash-4.2# yum list | grep php | grep redis
+php-nrk-Predis.noarch                   1.0.4-1.el7                   epel      
+php-pecl-redis.x86_64                   2.2.8-1.el7                   epel      
+php-phpiredis.x86_64                    1.0.0-2.el7                   epel   
+
+
+
+yum install -y php-pecl-redis.x86_64
+yum install -y php-phpiredis.x86_64
+```
+
