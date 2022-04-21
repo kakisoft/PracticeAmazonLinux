@@ -512,9 +512,70 @@ ERROR: `/var/tmp/redis/configure --with-php-config=/usr/bin/php-config --enable-
 ググっても解決につながる情報が見つからないし、ダメなパターンかな。これ。  
 
 
-# 検索
-という事で、別の方法を探してみる。
+## docker-php-ext-install
+こんな方法があるみたい。  
+[DockerでRedisのコンテナを作成しLaravelと接続する](https://zenn.dev/marushin/articles/4903cd0bbbcee0)  
 
+> FROM php:7.4-fpm  
+>  
+> RUN git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis && \  
+>   docker-php-ext-install redis  
+
+実行
+```
+git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis
+yum install docker-php-ext-install
+```
+実行結果
+```
+bash-4.2# docker-php-ext-install redis
+bash: docker-php-ext-install: command not found
+```
+docker-php-ext-install が使えるようになればいいのか？  
+
+という事で、実験。  
+```
+bash-4.2# yum install docker-php-ext-install
+Loaded plugins: ovl, priorities
+amzn2-core
+No package docker-php-ext-install available.
+Error: Nothing to do
+
+bash-4.2# amazon-linux-extras | grep docker-php-ext-install
+```
+ダメっぽい。  
+
+調べてみると、docker-php-ext-install はコンテナに事前に入ってる拡張機能をつかうためのものらしい。  
+
+[本番運用に備えたPHP7.3.0のコンテナを作る](https://qiita.com/tomoyamachi/items/ff5ac4a96063a12409cd)  
+
+> docker-php-ext-configureとdocker-php-ext-installは、コンテナイメージに事前に圧縮されて入っているエクステンションを操作できます。  
+>  
+> configure : 設定をカスタマイズしたいものの設定を行う ex) gd, intl  
+> install : 解凍してインストール  
+
+[Dockerの公式PHPのDockerfileを頑張って読んで理解しようとしてみた](https://unskilled.site/docker%E3%81%AE%E5%85%AC%E5%BC%8Fphp%E3%81%AEdockerfile%E3%82%92%E9%A0%91%E5%BC%B5%E3%81%A3%E3%81%A6%E8%AA%AD%E3%82%93%E3%81%A7%E7%90%86%E8%A7%A3%E3%81%97%E3%82%88%E3%81%86%E3%81%A8%E3%81%97%E3%81%A6/)  
+
+> docker-php-ext-*はdocker-php-ext-configure、docker-php-ext-enable、docker-php-ext-installの3つのスクリプトのことで、PHPエクステンションを簡単にインストール・有効化するために用意されたものです。
+
+|  スクリプト                     |  役目                            |
+|:---------------------------|:-------------------------------|
+|  docker-php-ext-configure  |  引数を元にphpizeやconfigure実行してくれる  |
+|  docker-php-ext-install    |  引数を元にエクステンションをインストールしてくれる     |
+|  docker-php-ext-enable     |  引数を元にエクステンションを有効にしてくれる        |
+
+[【PHP・Laravel】peclとは何か？pecl install と docker-php-ext-installの違い。docker-php-ext-enableなどの使い方を実例で解説（pearとの違い）](https://prograshi.com/language/php/pecl-install-docker-php-ext-install/)
+
+> docker-php-ext-installはPHPに標準で備わっている拡張パッケージのインストール＆有効化ができます。  
+>
+> pecl installはPHPに標準で備わっていないパッケージをインストールできます。  
+
+Amazon Linux は PHP に特化してるわけじゃないんで、こういった拡張項目が入ってないものと思われます。  
+
+という事で、この方法でのインストールは諦めます。  
+
+
+## epel-release
 以下では、yum でインストールできたみたい。  
 [Amazon Linux 2 にphp-pecl-redis入れる](https://jpdebug.com/p/2508550)
 
@@ -690,7 +751,8 @@ Could not connect to Redis at 127.0.0.1:6379: Connection refused
 
 これについては、考えられる原因がいくつかあるが、別トピックの話になるので次回に。  
 
-推測だけど、Docker コンテナに PhpRedis をインストールして有効化する事はできない気がする。  
+推測だけど、Docker コンテナに PhpRedis をインストールして有効化する事はできない気がします。  
 理由は続編にて。  
+
 
 
