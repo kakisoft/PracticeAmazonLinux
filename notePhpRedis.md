@@ -38,7 +38,7 @@ https://github.com/phpredis/phpredis/blob/develop/INSTALL.markdown
 
 
 
-## yum
+## yum でインストールしてみる
 公式の内容  
 
 > yum install php-pecl-redis  
@@ -168,7 +168,7 @@ Error: Package: php-pecl-igbinary-1.2.1-1.el7.x86_64 (epel)
 そんな感じで、yum を使った公式説明によるインストールは行き詰まりました。  
 
 
-# pickle
+## pickle でインストールしてみる
 公式にこんな記述がありました。
 
 > pecl install redis
@@ -432,7 +432,7 @@ Amazon Linux 特有の事情でもあるんかな、と思い「pickle Amazon Li
 これは、pickle を使うのは諦めた方がよさそう。  
 
 
-# pecl
+## pecl でインストールしてみる
 公式の内容  
 https://github.com/phpredis/phpredis/blob/develop/INSTALL.markdown  
 
@@ -512,7 +512,7 @@ ERROR: `/var/tmp/redis/configure --with-php-config=/usr/bin/php-config --enable-
 ググっても解決につながる情報が見つからないし、ダメなパターンかな。これ。  
 
 
-## docker-php-ext-install
+## docker-php-ext-install でインストールしてみる
 こんな方法があるみたい。  
 [DockerでRedisのコンテナを作成しLaravelと接続する](https://zenn.dev/marushin/articles/4903cd0bbbcee0)  
 
@@ -575,7 +575,7 @@ Amazon Linux は PHP に特化してるわけじゃないんで、こういっ�
 という事で、この方法でのインストールは諦めます。  
 
 
-## epel-release
+## yum でインストール（リポジトリを追加）
 以下では、yum でインストールできたみたい。  
 [Amazon Linux 2 にphp-pecl-redis入れる](https://jpdebug.com/p/2508550)
 
