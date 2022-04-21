@@ -12,26 +12,26 @@ https://github.com/phpredis/phpredis
 https://github.com/phpredis/phpredis/blob/develop/INSTALL.markdown
 
 _______________________________________
-PhpRedis のインストールに凄まじくハマってしまった
+【Amazon Linux】 PhpRedis のインストールに凄まじくハマった
 
 ## タスク
 EC2 に PHPの実行環境を作る。  
 
-本番２台、ステージング２台、開発用１台と、複数に設定が必要なため、シェルスクリプトを作成し、必要なツールやライブラリのインストールや設定はコマンド一発で完了できるようにしたい。  
+本番２台、ステージング２台、開発用１台と、複数に設定が必要なため、シェルスクリプトを作成して必要なツールやライブラリのインストールや設定はコマンド一発で完了できるようにしたい。  
 
 AWS が Amazon Linux の公式イメージを配布しているので、ローカルでそれを使って実験してみる。  
 実験用の EC2 を立てて、失敗したらインスタンス作り直し、という方法で進めるよりも効率よさそう。という事で、スクリプトはローカルの Amazon Linux コンテナに入って作成。  
+
 ちなみに配布先は、ここ。  
 https://hub.docker.com/_/amazonlinux  
 
 
 ## 状況
-Redis を PHP から使う時のライブラリに、「PhpRedis」を使おうとしている。  
+Redis を PHP から使う時のライブラリに、「PhpRedis」を使おうとしているが、どうにも上手く行かない。  
+以下、その実験記録。  
 
 （PhpRedis 公式サイト）  
 https://github.com/phpredis/phpredis
-
-が、どうにも上手く行かない。  
 
 （PhpRedis インストールガイド）  
 https://github.com/phpredis/phpredis/blob/develop/INSTALL.markdown
@@ -40,9 +40,9 @@ https://github.com/phpredis/phpredis/blob/develop/INSTALL.markdown
 
 ## yum
 公式の内容  
-```
-yum install php-pecl-redis
-```
+
+> yum install php-pecl-redis  
+
 実行結果  
 ```
 bash-4.2# yum install php-pecl-redis
@@ -59,16 +59,16 @@ amazon-linux-extras enable redis6
 yum install -y redis
 ```
 
-その後、yum install php-pecl-redis を実行しても、結果変わらず。
+その後、yum install php-pecl-redis を実行しても、結果変わらず。  
 
-公式サイトによると、EPEL repository から引っ張ってこれるらしい。
-https://docs.fedoraproject.org/en-US/epel/#_el9
+公式サイトによると、EPEL repository から引っ張ってこれるらしい。  
+https://docs.fedoraproject.org/en-US/epel/#_el9  
 
-なんじゃりゃ。
+なんじゃりゃ。  
 
 まず、EL9、EL8、EL7 と、どれを使えばいいのかが分からん。  
 
-dnf コマンドを使っているが、Amazon Linux では使えないみたい。  
+dnf コマンドを使っているが、Amazon Linux ではデフォルト状態だと使えないみたい。  
 これは Red Hat系で使われている RPMパッケージを扱うためのパッケージ管理コマンドらしい。  
 
 そんなのがあったのか...　rpm パッケージは、だいたい curl や wget で拾ってきてるイメージだった。 
@@ -79,13 +79,13 @@ dnf コマンドを使っているが、Amazon Linux では使えないみたい
 ```
 bash-4.2# yum -y install dnf
 Loaded plugins: ovl, priorities
-amzn2-core                                                                                                                                                   | 3.7 kB  00:00:00
+amzn2-core
 No package dnf available.
 Error: Nothing to do
 ```
 ダメっぽい。  
 
-そもそも、パッケージマネージャーをパッケージマネージャーでインストールする、というのはどういう状況やねん。（割とよく見る光景だけど）
+そもそも、パッケージマネージャーをパッケージマネージャーでインストールする、というのはどういう状況やねん。（割とよく見る光景だけど）  
 
 これも試してみたが、インストールできず。  
 [CentOS7.5にdnfをインストールする](https://qiita.com/piyojiro/items/58f9a89120808e1c1e84)  
@@ -690,8 +690,7 @@ Could not connect to Redis at 127.0.0.1:6379: Connection refused
 
 これについては、考えられる原因がいくつかあるが、別トピックの話になるので次回に。  
 
-まだ推測段階だけど、Docker コンテナに PhpRedis をインストールして有効化する事はできない気がする。  
-理由は後述。  
-
+推測だけど、Docker コンテナに PhpRedis をインストールして有効化する事はできない気がする。  
+理由は続編にて。  
 
 
