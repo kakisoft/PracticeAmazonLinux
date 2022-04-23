@@ -336,3 +336,37 @@ yum install -y php-pecl-redis.x86_64
 yum install -y php-phpiredis.x86_64
 ```
 
+
+___
+# Vagrant
+
+
+https://app.vagrantup.com/gbailey/boxes/amzn2
+
+```
+agrant up
+```
+
+```
+kakisoftnoMacBook:vagrant kakisoft$ vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Box 'gbailey/amzn2' could not be found. Attempting to find and install...
+==> default: Successfully added box 'gbailey/amzn2' (v20220422.0.0) for 'virtualbox'!
+
+(中略)
+
+There was an error while executing `VBoxManage`, a CLI used by Vagrant
+for controlling VirtualBox. The command and stderr is shown below.
+
+Command: ["startvm", "53425969-a53b-43ea-b566-ace68e90b44b", "--type", "headless"]
+
+Stderr: VBoxManage: error: The virtual machine 'vagrant_default_1650730233117_51806' has terminated unexpectedly during startup with exit code 1 (0x1)
+VBoxManage: error: Details: code NS_ERROR_FAILURE (0x80004005), component MachineWrap, interface IMachine
+```
+
+
+
+vagrant up
+vagrant box list
+vagrant box remove gbailey/amzn2
+
