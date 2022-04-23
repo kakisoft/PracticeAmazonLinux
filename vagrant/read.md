@@ -18,3 +18,10 @@ vagrant halt --force
 vagrant box list
 vagrant box remove gbailey/amzn2
 ```
+
+## become root user
+```
+sudo su
+
+-> vagrant
+```
