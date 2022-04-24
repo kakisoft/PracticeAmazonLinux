@@ -1,5 +1,7 @@
+【Amazon Linux】 GitHub CLI のインストールを諦めました
 
-最近、GitHub CLI を使ってるんで、Amazon Linux でも使ってみようかと思ってみた。
+_______________________________________________________________________________
+最近、GitHub CLI を使ってるんで、Amazon Linux でも使ってみようかと思ってみた。  
 
 GitHub CLI とは、Git の操作をコマンドラインで実行するためのツールです。  
 AWS CLI みたいなもんだと思ってください。  
@@ -19,7 +21,7 @@ yum でのインストールはできないみたい。
 ## Conda を使う（断念）
 Python のパッケージマネージャー。  
 PHP で言う Composer みたいなもん。  
-pip と何が違うんだろう。パッケージマネージャーの世界は、どの言語の界隈でも深刻なのか・・・？
+pip と何が違うんだろう。パッケージマネージャーの世界は、どの言語の界隈でも深刻なのか・・・？  
 
 Amazon Linux に conda をインストールする方法を探してみました。  
 ヒットした内容を色々試してみましたが、見事に全滅しました。  
@@ -32,7 +34,7 @@ Amazon Linux に conda をインストールする方法を探してみました
 ## Spack を使う
 [Spackによるソフトウェア管理 - ABCI 2.0 User Guide](https://docs.abci.ai/ja/tips/spack/#:~:text=Spack%E3%81%A8%E3%81%AF%E3%80%81Lawrence%20Livermore,%E4%BD%BF%E3%81%86%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82)  
 
-> Spackとは、Lawrence Livermore National Laboratoryで開発されている高性能計算向けのソフトウェアパッケージ管理システムです。 Spackを使うことにより、同一ソフトウェアをバージョン、設定、コンパイラを様々に変えて複数ビルドし、切り替えて使うことができます。
+> Spackとは、Lawrence Livermore National Laboratoryで開発されている高性能計算向けのソフトウェアパッケージ管理システムです。 Spackを使うことにより、同一ソフトウェアをバージョン、設定、コンパイラを様々に変えて複数ビルドし、切り替えて使うことができます。  
 
 という事らしい。  
 
@@ -43,7 +45,7 @@ Amazon Linux に conda をインストールする方法を探してみました
 > git checkout v0.16.0  
 > source ${HOME}/spack/share/spack/setup-env.sh  
 
-ガイドに従い、実行してみる。
+ガイドに従い、実行してみる。  
 ```
 [root@localhost vagrant]# git clone https://github.com/spack/spack.git
 Cloning into 'spack'...
@@ -125,7 +127,7 @@ query packages:
 ```
 ./spack install gh
 ```
-以下、実行結果。
+以下、実行結果。  
 ```
 vagrant@localhost bin]$ ./spack install gh
 ==> Bootstrapping clingo from pre-built binaries
@@ -172,9 +174,11 @@ Amazon Linux で GitHub CLI を使うのは諦めましょう。（2022/4/24 時
 ちなみに、EC2 インスタンスを起動して色々実験すると、ハマッた時間の分だけ課金されるのが嫌だったので、Vagrant でローカルに Amazon Linux を起動して、その中で実験しました。  
 もしかしたら、EC2 上で実行すると、また違った結果が得られるかもしれません。  
 
-気が向いたら試してみます。  
+ですが、GitHub CLI の記事で、「各種OSのインストール方法」を解説している内容はいくつかヒットするものの、Debian系（Amazon Linux、CentOS 等）がことごとく避けられている事から、恐らく仮想マシンである事は関係ないような気がします。  
 
-Vagrant で起動したマシンにて、　/etc/system-release, /etc/os-release にてディストリを確認したみたところ、こんな感じでした。  
+気が向いたら試してみたいと思わなくはないですが、そんな事よりもシュノーケリングやりてーです。  
+
+ちなみに、Vagrant で起動したマシンにて、　/etc/system-release, /etc/os-release にてディストリを確認したみたところ、こんな感じで、EC2 の内容と同一である事を確認しました。  
 ```
 [root@localhost vagrant]# cat /etc/system-release
 Amazon Linux release 2 (Karoo)
