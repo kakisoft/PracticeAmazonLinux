@@ -370,3 +370,37 @@ vagrant up
 vagrant box list
 vagrant box remove gbailey/amzn2
 
+
+
+
+
+php -i | grep php.ini
+
+/etc/php.ini
+
+echo "extension=redis.so" >> /etc/php.ini
+
+
+
+=======================================================
+root ユーザで実行しています。
+
+amazon-linux-extras enable php8.0
+sudo yum install -y php
+sudo yum install -y php-bcmath php-dom php-gd php-mbstring php-mysqli php-posix php-sodium php-opcache
+sudo yum install -y php-devel
+wget https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar
+php pickle.phar
+chmod +x pickle.phar
+php pickle.phar info apcu
+mv pickle.phar pickle
+php pickle install redis
+echo "extension=redis.so" >> /etc/php.ini
+php -m | grep redis
+
+
+「php pickle install redis」を入力した時、色々聞かれますが、全部デフォルトにしました。
+=======================================================
+
+
+

@@ -13,6 +13,11 @@ vagrant halt
 vagrant halt --force
 ```
 
+## discard
+```
+vagrant destroy
+```
+
 ## box
 ```
 vagrant box list
