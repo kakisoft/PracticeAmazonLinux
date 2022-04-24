@@ -1,8 +1,0 @@
-version: "3"
-
-services:
-  amazon_linux:
-    container_name: amazon_linux
-    build: ./containers
-    image: amazonlinux
-    tty: true
