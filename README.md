@@ -46,6 +46,58 @@ https://qiita.com/kazu56/items/3eeab8884f62be1cf3e6
 
 
 ________________________________________________________
+# nginx メモ
+
+
+
+sudo amazon-linux-extras enable nginx1
+sudo yum install -y nginx
+
+
+## nginxメインプロセス番号を照会
+ps -ef | grep nginx
+
+
+
+sudo systemctl 有効 nginx
+
+
+curl: (7) Failed to connect to  after 0 ms: Connection refused
+curl: (7) Failed to connect to 127.0.0.1 port 8080 after 0 ms: Connection refused
+
+
+
+curl http://localhost/
+curl http://localhost:80/
+curl http://localhost:8000/
+curl http://localhost:8080/
+
+curl -I 127.0.0.1
+curl -I 127.0.0.1:80/
+curl -I 127.0.0.1:8000/
+curl -I 127.0.0.1:8080/
+
+
+
+vi /etc/nginx/nginx.conf
+
+root         /usr/share/nginx/html;
+
+
+
+
+========================================================================
+https://i-think-it.net/ec2-startup-centos7-7/
+----------------------------------------
+/etc/sysconfig/selinux
+SELINUX=disabled
+----------------------------------------
+
+
+
+========================================================================
+
+
 
 
 
