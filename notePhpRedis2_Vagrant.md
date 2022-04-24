@@ -17,8 +17,26 @@ AWS 公式の box は無いみたいなんで、ダウンロード数の最も�
 最終更新も１日前と、フレッシュな状態を保っていました。（実験時の日付：2022/4/24）  
 https://app.vagrantup.com/gbailey/boxes/amzn2  
 
+/etc/system-release, /etc/os-release にてディストリを確認したみたところ、こんな感じでした。  
+```
+[root@localhost vagrant]# cat /etc/system-release
+Amazon Linux release 2 (Karoo)
 
-ちなみに、PhpRedis の公式サイトは以下。
+
+[root@localhost vagrant]# cat /etc/os-release
+NAME="Amazon Linux"
+VERSION="2"
+ID="amzn"
+ID_LIKE="centos rhel fedora"
+VERSION_ID="2"
+PRETTY_NAME="Amazon Linux 2"
+ANSI_COLOR="0;33"
+CPE_NAME="cpe:2.3:o:amazon:amazon_linux:2"
+HOME_URL="https://amazonlinux.com/"
+```
+現在稼働中の EC2 と同内容だったため、これは行けると思い、先に進む。
+
+ちなみに、PhpRedis の公式サイトは以下。  
 
 （PhpRedis 公式サイト）  
 https://github.com/phpredis/phpredis
@@ -26,7 +44,7 @@ https://github.com/phpredis/phpredis
 （PhpRedis インストールガイド）  
 https://github.com/phpredis/phpredis/blob/develop/INSTALL.markdown
 
-PHP のバージョンは 8.0。
+PHP のバージョンは 8.0 です。
 
 ## yum によるインストール（失敗）
 以下、実行コマンド。  

@@ -12,6 +12,24 @@ AWS が Amazon Linux の公式イメージを Docker Hub にて配布してい�
 ちなみに配布先は、ここ。  
 https://hub.docker.com/_/amazonlinux  
 
+/etc/system-release, /etc/os-release にてディストリを確認したみたところ、こんな感じでした。  
+```
+bash-4.2# cat /etc/system-release
+Amazon Linux release 2 (Karoo)
+
+bash-4.2# cat /etc/os-release
+NAME="Amazon Linux"
+VERSION="2"
+ID="amzn"
+ID_LIKE="centos rhel fedora"
+VERSION_ID="2"
+PRETTY_NAME="Amazon Linux 2"
+ANSI_COLOR="0;33"
+CPE_NAME="cpe:2.3:o:amazon:amazon_linux:2"
+HOME_URL="https://amazonlinux.com/"
+```
+
+現在稼働中の EC2 と同内容だったため、これは行けると思い、先に進む。
 
 ## 状況
 Redis を PHP から使う時のライブラリに、「PhpRedis」を使おうとしているが、どうにも上手く行かない。  
