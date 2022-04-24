@@ -3,6 +3,8 @@ FROM amazonlinux:2
 # RUN yum -y update
 RUN yum -y install sudo
 
+##### ps command
+RUN sudo yum -y install procps
 
 ##### tmp
 RUN echo "PHP Installing..."
