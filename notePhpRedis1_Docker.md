@@ -1,25 +1,12 @@
-amazon-linux-extras | grep redis
-amazon-linux-extras enable redis6
-
-PhpRedis
-
-php-redis
-
-（公式）
-https://github.com/phpredis/phpredis
-
-インストールガイド（公式）
-https://github.com/phpredis/phpredis/blob/develop/INSTALL.markdown
-
-_______________________________________
-【Amazon Linux】 PhpRedis のインストールに凄まじくハマった
+【Amazon Linux】 PhpRedis のインストールに凄まじくハマった(Docker編)
 
 ## タスク
 EC2 に PHPの実行環境を作る。  
 
 本番２台、ステージング２台、開発用１台と、複数に設定が必要なため、シェルスクリプトを作成して必要なツールやライブラリのインストールや設定はコマンド一発で完了できるようにしたい。  
 
-AWS が Amazon Linux の公式イメージを配布しているので、ローカルでそれを使って実験してみる。  
+## 方針
+AWS が Amazon Linux の公式イメージを Docker Hub にて配布しているので、ローカルでそれを使って実験してみる。  
 実験用の EC2 を立てて、失敗したらインスタンス作り直し、という方法で進めるよりも効率よさそう。という事で、スクリプトはローカルの Amazon Linux コンテナに入って作成。  
 
 ちなみに配布先は、ここ。  
@@ -36,7 +23,7 @@ https://github.com/phpredis/phpredis
 （PhpRedis インストールガイド）  
 https://github.com/phpredis/phpredis/blob/develop/INSTALL.markdown
 
-
+PHP のバージョンは 8.0。
 
 ## yum でインストールしてみる
 公式の内容  
@@ -474,7 +461,6 @@ Complete!
 
 
 sudo yum -y --enablerepo=remi-php74 install php-pear
-
 
 sudo yum -y --enablerepo=remi-php74 install php-pear
 

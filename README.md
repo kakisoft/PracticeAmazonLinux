@@ -381,8 +381,13 @@ php -i | grep php.ini
 echo "extension=redis.so" >> /etc/php.ini
 
 
+-----
+sudo yum -y --enablerepo=remi-php74 install php-pear
+sudo yum -y --enablerepo=remi-php74 install php-pear
+-----
 
 =======================================================
+＜pickle＞
 root ユーザで実行しています。
 
 amazon-linux-extras enable php8.0
@@ -399,8 +404,52 @@ echo "extension=redis.so" >> /etc/php.ini
 php -m | grep redis
 
 
-「php pickle install redis」を入力した時、色々聞かれますが、全部デフォルトにしました。
+「php pickle install redis」と入力した時、色々聞かれますが、全部デフォルトにしました。
 =======================================================
+
+
+=======================================================
+＜yum＞
+amazon-linux-extras enable epel
+sudo yum install -y epel-release
+sudo yum install -y https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+sudo yum install -y php80-php-pecl-redis5.x86_64
+echo "extension=redis.so" >> /etc/php.ini
+php -m | grep redis
+
+```
+[root@localhost vagrant]# php -m | grep redis
+PHP Warning:  PHP Startup: Unable to load dynamic library 'redis.so' (tried: /usr/lib64/php/modules/redis.so (/usr/lib64/php/modules/redis.so: cannot open shared object file: No such file or directory), /usr/lib64/php/modules/redis.so.so (/usr/lib64/php/modules/redis.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+```
+
+=======================================================
+
+
+
+=======================================================
+＜pecl＞
+amazon-linux-extras enable epel
+sudo yum install -y epel-release
+sudo yum install -y http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+sudo yum -y --enablerepo=remi-php74 install php-pear
+pecl install redis
+
+
+
+「pecl install redis」と入力した時、色々聞かれますが、全部デフォルトにしました。
+
+
+```
+Build process completed successfully
+Installing '/usr/lib64/php/modules/redis.so'
+install ok: channel://pecl.php.net/redis-5.3.7
+configuration option "php_ini" is not set to php.ini location
+You should add "extension=redis.so" to php.ini
+```
+
+
+=======================================================
+
 
 
 
