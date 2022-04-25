@@ -13,11 +13,38 @@ sudo systemctl enable nginx
 sudo systemctl start nginx
 ```
 
-# Install
+# start/stop
+こっちの方が安定している気がする。
 ```
-systemctl start nginx
+sudo systemctl start nginx
 
-systemctl stop nginx
+sudo systemctl restart nginx
+
+sudo systemctl stop nginx
+```
+
+nginx コマンドを使う場合
+```
+sudo nginx
+
+sudo nginx -s restart
+
+sudo nginx -s quit
+sudo nginx -s stop
+```
+-s stop terminates the nginx process immediately while -s quit does a graceful shutdown.
+
+
+# Config Check
+```
+sudo nginx -t
+```
+
+# Config Reload
+```
+systemctl reload nginx
+
+sudo nginx -s reload
 ```
 
 # status check
@@ -36,5 +63,20 @@ ps ax | grep nginx
 |  /usr/share/nginx/html/  |  WEBサイトの公開ディレクトリ              |
 
 
+# Truble shoot
 
+## Port error
+```
+nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+```
+ポートが占有されている。  
+終了に失敗すると、プロセスが残っている事がある。  
+
+```
+sudo lsof -i | grep nginx
+
+sudo kill -9 3254
+sudo kill -9 3255
+```
 
