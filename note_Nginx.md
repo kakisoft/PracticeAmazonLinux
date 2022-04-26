@@ -42,7 +42,7 @@ sudo nginx -t
 
 # Config Reload
 ```
-systemctl reload nginx
+sudo systemctl reload nginx
 
 sudo nginx -s reload
 ```
