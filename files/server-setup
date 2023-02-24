@@ -25,7 +25,7 @@ echo "Nginx Installing..."
 sudo amazon-linux-extras enable nginx1
 sudo yum install -y nginx
 
-echo "Nginx Setting...."
+echo "Nginx Setting..."
 sudo systemctl enable nginx
 sudo systemctl start nginx
 
